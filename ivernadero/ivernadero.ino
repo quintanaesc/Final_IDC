@@ -88,7 +88,7 @@ void loop() {
   //realizamos un get para encender o apagar la lampara
   //getEstado();
 
-  delay(1500);
+  delay(10000);
 }
 
 void postBD(int temperatura, String iluminacion){
