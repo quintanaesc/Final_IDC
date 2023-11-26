@@ -25,7 +25,7 @@ int venti= 12;
 int lamp = 14;
 
 //rango de temperatura de operacion del sensor(°C)
-int optTempMin = -55;
+int optTempMin = 0;
 int optpTempMax = 150;
 int optTempRang = optpTempMax - optTempMin;
 
@@ -70,7 +70,7 @@ void loop() {
   // Lee el valor digital y calcula la iluminación
   int lecturaDigital = digitalRead(digtLuz);
   String iluminacion;
-  if(lecturaDigital = ctrLuzEnsen){
+  if(lecturaDigital == ctrLuzEnsen){
     iluminacion = "Habitacion iluminada";
   }else{
     iluminacion = "Habitacion no iluminada";
