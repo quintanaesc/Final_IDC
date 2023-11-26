@@ -1,0 +1,111 @@
+html {
+    font-family: Arial;
+    display: inline-block;
+    margin: 0px auto;
+    text-align: center;
+}
+
+h1 {
+    background-color: black;
+    color: white;
+    padding: 10px;
+}
+
+.buttonON {
+    display: inline-block;
+    padding: 15px 25px;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    outline: none;
+    color: #fff;
+    background-color: #4CAF50;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 5px #999;
+}
+
+.buttonON:hover {
+    background-color: #3e8e41
+}
+
+.buttonON:active {
+    background-color: #3e8e41;
+    box-shadow: 0 1px #666;
+    transform: translateY(4px);
+}
+
+.buttonOFF {
+    display: inline-block;
+    padding: 15px 25px;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    outline: none;
+    color: #fff;
+    background-color: #e74c3c;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 5px #999;
+}
+
+.buttonOFF:hover {
+    background-color: #c0392b
+}
+
+.buttonOFF:active {
+    background-color: #c0392b;
+    box-shadow: 0 1px #666;
+    transform: translateY(4px);
+}
+
+.text {
+    text-align: center;
+    font-size: 18px;
+    width: 200px;
+    height: 22px;
+    border: 3px solid #9b59b6;
+    border-radius: 5px;
+    padding: 3px;
+    -webkit-transition: border 0.5s ease-in-out, box-shadow 0.5s ease-in-out;
+    -moz-transition: border 0.5s ease-in-out, box-shadow 0.5s ease-in-out;
+    -ms-transition: border 0.5s ease-in-out, box-shadow 0.5s ease-in-out;
+    -o-transition: border 0.5s ease-in-out, box-shadow 0.5s ease-in-out;
+    transition: border 0.5s ease-in-out, box-shadow 0.5s ease-in-out;
+}
+
+.text:focus {
+    border: 3px solid #8e44ad;
+    box-shadow: 0 0 7px #8e44ad;
+    outline: none;
+}
+
+body {
+    background-image: url("DestileriaDeFondo.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.top-left {
+    position: absolute;
+    top: 100px;
+    left: 10px;
+}
+
+.top-right {
+    position: absolute;
+    top: 100px;
+    right: 10px;
+}
+
+.centered {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
