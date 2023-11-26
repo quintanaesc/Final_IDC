@@ -11,24 +11,36 @@ h1 {
     padding: 10px;
 }
 
-.buttonON {
+.buttonON,
+.buttonOFF {
     display: inline-block;
-    padding: 15px 25px;
-    font-size: 24px;
+    font-size: 2vw;
     font-weight: bold;
     cursor: pointer;
     text-align: center;
     text-decoration: none;
     outline: none;
     color: #fff;
-    background-color: #4CAF50;
     border: none;
     border-radius: 15px;
     box-shadow: 0 5px #999;
+    padding: 2vw 4vw;
+    margin-top: 10px;
+    margin-right: 10px;
+    width: 100%; 
+}
+
+.buttonON,
+.buttonOFF {
+    padding: 2vw 4vw; /* Padding en relación con el ancho del contenedor */
+}
+
+.buttonON {
+    background-color: #4CAF50;
 }
 
 .buttonON:hover {
-    background-color: #3e8e41
+    background-color: #3e8e41;
 }
 
 .buttonON:active {
@@ -38,23 +50,11 @@ h1 {
 }
 
 .buttonOFF {
-    display: inline-block;
-    padding: 15px 25px;
-    font-size: 24px;
-    font-weight: bold;
-    cursor: pointer;
-    text-align: center;
-    text-decoration: none;
-    outline: none;
-    color: #fff;
     background-color: #e74c3c;
-    border: none;
-    border-radius: 15px;
-    box-shadow: 0 5px #999;
 }
 
 .buttonOFF:hover {
-    background-color: #c0392b
+    background-color: #c0392b;
 }
 
 .buttonOFF:active {
@@ -62,6 +62,7 @@ h1 {
     box-shadow: 0 1px #666;
     transform: translateY(4px);
 }
+
 
 .text {
     text-align: center;
@@ -85,7 +86,7 @@ h1 {
 }
 
 body {
-    background-image: url("DestileriaDeFondo.jpg");
+    background-image: url("imagenes/DestileriaDeFondo.jpg");
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -102,6 +103,12 @@ body {
     top: 100px;
     right: 10px;
 }
+
+.mode-container {
+    color: white;
+    font-size: 14px;
+    text-align: left;
+  }
 
 .centered {
     display: flex;

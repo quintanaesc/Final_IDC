@@ -17,29 +17,35 @@
         <h1>NodeMCU ESP8266/ESP12E Control de luz y temperatura de un invernadero</h1>
         <canvas id="MiGrráfica"></canvas>
         <br>
-        <div class="top-left">
-            <div class="button-container1">
-                <button type="button" id="light-on" class="buttonON">Lampara encendida</button>
-                <button type="button" id="light-off" class="buttonOFF">Lampara apagada</button>
-            </div>
-            <div class="button-container2">
-                <button type="button" id="fan-on" class="buttonON">
-                    <link>Ventilador encendido</link>
-                </button>
-                <button type="button" id="fan-off" class="buttonOFF">
-                    <link>Ventilador apagado</link>
-            </div>
-            </button>
-            <br>
-            <div class="mode-container">
-                <input type="checkbox" id="manual-mode">
-                <label for="manual-mode">Modo Manual</label>
-            </div>
 
-            <div class="mode-container">
-                <input type="checkbox" id="auto-mode">
-                <label for="auto-mode">Modo Automático</label>
-            </div>
+        <div class="top-left">
+
+            <form class="mode-container" action="">
+                <input type="radio" name="Modo" id="auto-mode" value="Automatico" checked>
+                <label for="auto-mode">Modo Automatico</label>
+                <input type="radio" name="Modo" id="manual-mode" value="Manual">
+                <label for="manual-mode">Modo Manual</label>
+            </form>
+            <hr style="color: black;">
+            <table>
+                <tr>
+                    <td>
+                        <button type="button" id="light-on" class="buttonON">Lampara encendida</button>
+                    </td>
+                    <td>
+                        <button type="button" id="light-off" class="buttonOFF">Lampara apagada</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <button type="button" id="fan-on" class="buttonON">Ventilador encendido</button>
+                    </td>
+                    <td>
+                        <button type="button" id="fan-off" class="buttonOFF">Ventilador apagado</button>
+                    </td>
+                </tr>
+            </table>
+            <br>
         </div>
         <br>
         <div class="top-right">
