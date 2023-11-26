@@ -29,7 +29,7 @@ try {
     $stmt->bindParam(':hora', $hora);
     $stmt->execute();
 
-    echo "Datos insertados correctamente en la base de datos.";
+    echo "Datos insertados correctamente en la base de datos.".$fecha."-".$hora;
 
 } catch (PDOException $e) {
     echo "Error de conexión: " . $e->getMessage();
