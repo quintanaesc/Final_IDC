@@ -111,6 +111,13 @@ body {
     right: 10px;
 }
 
+.bottom-center {
+    position: absolute;
+    bottom: 100px;
+    right: 10px;
+    left: 10px;
+}
+
 .mode-container {
     color: white;
     font-size: 14px;
@@ -128,4 +135,49 @@ body {
     width: 100%;
     border-collapse: collapse;
     background-color: rgba(255, 255, 255, 0.60); /* Fondo blanco con transparencia del 60% */
+  }
+
+  .formDato {
+    width: 900px;
+    background: #e4e8ec;
+    padding: 30px;
+    margin: auto;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    border-radius: 4px;
+    font-family: 'calibri';
+    color: rgb(0, 0, 0);
+    box-shadow: 7px 13px 37px #000;
+  }
+  .formDato h4 {
+    font-size: 22px;
+    margin-bottom: 20px;
+  }
+
+  .common_style>section {
+    padding: 50px 0;
+  }
+  
+  .common_style .row {
+    align-items: center;
+  }
+  
+  .common_style h3 {
+    font-weight: 600;
+    color: #151516;
+  }
+  
+  .common_style p {
+    font-weight: 600;
+    color: #4e4f50;
+    margin: 30px 0 50px 0;
+  }
+  
+  .common_style img {
+    width: 100%;
+  }
+  .DatoBox {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
   }
