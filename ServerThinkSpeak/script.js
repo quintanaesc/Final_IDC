@@ -1,4 +1,53 @@
-document.getElementById('light-on').addEventListener('click', function () {
+window.onload = function () {
+    cambiaModo('auto')
+};
+
+function cambiaModo(modo){
+    if(modo == 'auto'){
+        desactivarBotones()
+    }else
+    {
+        activarBotones()
+    }
+}
+
+function desactivarBotones() {
+    // Obtener la referencia a la tabla
+    var tabla = document.getElementById('tablaBotones');
+
+    // Verificar si la tabla existe
+    if (tabla) {
+        // Obtener todos los botones dentro de la tabla
+        var botones = tabla.getElementsByTagName('button');
+
+        // Iterar sobre los botones y aplicar el estilo
+        for (var i = 0; i < botones.length; i++) {
+            botones[i].classList.add('boton-desactivado');
+        }
+    } else {
+        console.error('No se encontró la tabla con el id "tablaBotones"');
+    }
+}
+
+function activarBotones() {
+    // Obtener la referencia a la tabla
+    var tabla = document.getElementById('tablaBotones');
+
+    // Verificar si la tabla existe
+    if (tabla) {
+        // Obtener todos los botones dentro de la tabla
+        var botones = tabla.getElementsByTagName('button');
+
+        // Iterar sobre los botones y aplicar el estilo
+        for (var i = 0; i < botones.length; i++) {
+            botones[i].classList.remove('boton-desactivado');
+        }
+    } else {
+        console.error('No se encontró la tabla con el id "tablaBotones"');
+    }
+}
+
+/* document.getElementById('light-on').addEventListener('click', function () {
     var ts_api_key = document.getElementById('ts-api-key').value;
     var url = "http://api.thingspeak.com/update?api_key=" + ts_api_key + "&field1=1"
     $.getJSON(url, function (data) {
@@ -33,3 +82,4 @@ function getThingSpeakLightState() {
     xhttp.open("GET", "https://api.thingspeak.com/channels/" + ts_channel_id + "/fields/1/last.json?api_key=YIFS5N23NKEK9VZW&results=2", true);
     xhttp.send();
 }
+ */
