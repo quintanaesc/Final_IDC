@@ -11,6 +11,13 @@ function cambiaModo(modo){
     }
 }
 
+function cambiaEstado(inputId, estado) {
+    // Cambia el valor del input oculto según el estado seleccionado
+    document.getElementById(inputId).value = estado;
+}
+
+
+
 function desactivarBotones() {
     // Obtener la referencia a la tabla
     var tabla = document.getElementById('tablaBotones');
