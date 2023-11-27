@@ -40,7 +40,9 @@ String iluminacionServ;
 String estadoLamparaServ;
 String estadoVentiladorServ;
 
-
+//estado final 
+String estadoLamparaFinal;
+String estadoVentiladorFinal;
 void setup() {
   // Inicia la comunicación serial
   Serial.begin(9600);
@@ -72,7 +74,7 @@ void loop() {
   // Lee el valor digital y calcula la iluminación
   int lecturaDigital = digitalRead(digtLuz);
   String iluminacion;
-  if (lecturaDigital == 1) {
+  if (lecturaDigital == 0) {
     iluminacion = "Habitacion iluminada";
   } else {
     iluminacion = "Habitacion no iluminada";
@@ -171,37 +173,44 @@ void actuadores() {
     if (temperaturaServ.toInt() > ctrpTempMax) {
       digitalWrite(venti, HIGH);
       Serial.println("Encendiendo Ventilador");
+      estadoVentiladorFinal = "Encendido";
     } else {
       digitalWrite(venti, LOW);
       Serial.println("Apagando Ventilador");
+      estadoVentiladorFinal = "Apagado";
     }
   } else if (estadoVentiladorServ == "Apagado") {
     digitalWrite(venti, LOW);
     Serial.println("Apagando Ventilador");
+    estadoVentiladorFinal = "Apagado";
   } else if (estadoVentiladorServ == "Encendido") {
     digitalWrite(venti, HIGH);
     Serial.println("Encendiendo Ventilador");
-
+    estadoVentiladorFinal = "Encendido";
   }
   //lampara
   if (estadoLamparaServ == "Automatico") {
-    if (iluminacionServ == ctrpLuzEnc) {
+    if (iluminacionServ != ctrpLuzEnc) {
       digitalWrite(lamp, HIGH);
       Serial.println("Encendiendo Lampara");
+      estadoLamparaFinal = "Encendido";
     } else {
       digitalWrite(lamp, LOW);
       Serial.println("Apagando Lampara");
+      estadoLamparaFinal = "Apagado";
     }
   } else if (estadoLamparaServ == "Apagado") {
     digitalWrite(lamp, LOW);
     Serial.println("Apagando Lampara");
+    estadoLamparaFinal = "Apagado";
   } else if (estadoLamparaServ == "Encendido") {
     digitalWrite(lamp, HIGH);
     Serial.println("Encendiendo Lampara");
+    estadoLamparaFinal = "Encendido";
   }
 }
 void postFinal(){
-  String sEnviado = "temperatura=" + temperaturaServ + "&iluminacion=" + iluminacionServ + "&lampara=" + estadoLamparaServ + "&ventilador=" + estadoVentiladorServ;
+  String sEnviado = "temperatura=" + temperaturaServ + "&iluminacion=" + iluminacionServ + "&lampara=" + estadoLamparaFinal + "&ventilador=" + estadoVentiladorFinal;
   HTTPClient http;
   http.begin(client, servidorFinal);
   http.addHeader("Content-Type", "application/x-www-form-urlencoded");
