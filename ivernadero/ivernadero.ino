@@ -86,7 +86,7 @@ void loop() {
   postBD(temperatura,iluminacion);
 
   //realizamos un get para encender o apagar la lampara
-  //getEstado();
+  String estadoServer = getEstado();
 
   delay(10000);
 }
@@ -109,3 +109,15 @@ void postBD(int temperatura, String iluminacion){
     http.end(); // Termina la conexión
   }
 }
+
+String getEstado(){
+  HTTPClient http;
+  String url = "http://internetdelacosa.000webhostapp.com/server_Actua.php";
+  http.begin(client, url);
+  http.addHeader("Content-Type", "application/x-www-form-urlencoded");
+
+  int iCodigoRespuesta = http.GET();
+  String respuesta = http.getString();
+  Serial.println(respuesta);
+  return respuesta;
+  }
