@@ -16,6 +16,10 @@ function cambiaEstado(inputId, estado) {
     document.getElementById(inputId).value = estado;
 }
 
+function onSubmitForm() {
+    // Devuelve false para evitar que el formulario se envíe de la manera convencional
+    return false;
+}
 
 
 function desactivarBotones() {

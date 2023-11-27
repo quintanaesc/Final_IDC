@@ -21,7 +21,7 @@
         <!-- botones -->
         <div class="top-left">
 
-            <form class="mode-container" action="server_Actua.php" method="POST">
+            <form class="mode-container" id="ivernForm" action="estado.php" method="POST" onsubmit="return onSubmitForm()">
 
                 <input type="radio" name="Modo" id="auto-mode" value="Automatico" checked onchange="cambiaModo('auto')">
                 <label for="auto-mode">Modo Automatico</label>
