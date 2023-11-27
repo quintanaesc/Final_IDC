@@ -63,6 +63,13 @@ h1 {
     transform: translateY(4px);
 }
 
+/* Estilos para botones desactivados cuando el radio está seleccionado */
+.boton-desactivado {
+    color: gray;
+    background-color: lightgray;
+    cursor: not-allowed;
+    pointer-events: none; /* Evita eventos del mouse en botones desactivados */
+}
 
 .text {
     text-align: center;
@@ -116,3 +123,9 @@ body {
     align-items: center;
     height: 100vh;
 }
+
+.table-img {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: rgba(255, 255, 255, 0.60); /* Fondo blanco con transparencia del 60% */
+  }
