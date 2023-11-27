@@ -1,5 +1,4 @@
 <?php
-while(true){
     // Paso 1: Obtener del formulario el modo ("Automatico" o "Manual")
     $modo = "Automatico"; // Establecer el modo predeterminado como "Automatico"
     if(isset($_POST['Modo'])){
@@ -48,7 +47,4 @@ while(true){
     } catch (PDOException $e) {
         echo "Error al insertar datos: " . $e->getMessage();
     }
-    
-    sleep(60);
-}
 ?>
