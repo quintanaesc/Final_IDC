@@ -5,9 +5,11 @@ window.onload = function () {
 function cambiaModo(modo){
     if(modo == 'auto'){
         desactivarBotones()
+        cambiaEstado("lampara_estado", "Automatico");
+        cambiaEstado("ventilador_estado", "Automatico");
     }else
     {
-        activarBotones()
+        activarBotones();
     }
     onSubmitForm();
 }
