@@ -15,6 +15,7 @@ WiFiClient client;
 
 //Servidor php para enviar a la base de datos
 String servidor = "http://internetdelacosa.000webhostapp.com/sensores_BD.php";
+String servidorFinal = "http://internetdelacosa.000webhostapp.com/node_Final.php";
 
 
 //selecionamos pines
@@ -91,6 +92,9 @@ void loop() {
 
   //desidimos si encender los actuadores
   actuadores();
+
+  //se envia el reporte final
+  postFinal();
   delay(10000);
 }
 
@@ -127,6 +131,7 @@ void getEstado() {
   iluminacionServ = dividirResp(respuesta, "iluminacion");
   estadoLamparaServ = dividirResp(respuesta, "estadoLampara");
   estadoVentiladorServ = dividirResp(respuesta, "estadoVentilador");
+  http.end(); // Termina la conexión
 }
 
 String dividirResp(String respuesta, String  identificador) {
@@ -193,5 +198,22 @@ void actuadores() {
   } else if (estadoLamparaServ == "Encendido") {
     digitalWrite(lamp, HIGH);
     Serial.println("Encendiendo Lampara");
+  }
+}
+void postFinal(){
+  String sEnviado = "temperatura=" + temperaturaServ + "&iluminacion=" + iluminacionServ + "&lampara=" + estadoLamparaServ + "&ventilador=" + estadoVentiladorServ;
+  HTTPClient http;
+  http.begin(client, servidorFinal);
+  http.addHeader("Content-Type", "application/x-www-form-urlencoded");
+  //envio de post cpm esra de respuesta
+  int iCodigoRespuesta = http.POST(sEnviado);
+  if (iCodigoRespuesta > 0) {
+    Serial.println("Codigo de respuesta: : " + String(iCodigoRespuesta));
+    if (iCodigoRespuesta == 200) {
+      String sRecibido = http.getString();
+      Serial.println("Respuesta del servidor final: ");
+      Serial.println("->" + sRecibido);
+    }
+    http.end(); // Termina la conexión
   }
 }
