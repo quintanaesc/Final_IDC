@@ -71,7 +71,7 @@ void loop() {
   // Lee el valor digital y calcula la iluminación
   int lecturaDigital = digitalRead(digtLuz);
   String iluminacion;
-  if (lecturaDigital == 0) {
+  if (lecturaDigital == 1) {
     iluminacion = "Habitacion iluminada";
   } else {
     iluminacion = "Habitacion no iluminada";
