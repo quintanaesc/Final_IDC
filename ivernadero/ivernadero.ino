@@ -29,15 +29,9 @@ int optTempMin = 0;
 int optpTempMax = 150;
 int optTempRang = optpTempMax - optTempMin;
 
-//rango de temperatura de control del sensor(°C)
-int ctrTempMin = 15;
-int ctrpTempMax = 20;
-
-// valores de contro de luz
-int ctrLuzEnsen = 0;
-
-//contro automatico 1,0 (S/N)
-int controlAuto = 0;
+//valores de conrtrol
+int ctrpTempMax = 15;
+String ctrpLuzEnc = "Habitacion iluminada";
 
 // Variables en el server
 String temperaturaServ;
@@ -77,7 +71,7 @@ void loop() {
   // Lee el valor digital y calcula la iluminación
   int lecturaDigital = digitalRead(digtLuz);
   String iluminacion;
-  if (lecturaDigital == ctrLuzEnsen) {
+  if (lecturaDigital == 0) {
     iluminacion = "Habitacion iluminada";
   } else {
     iluminacion = "Habitacion no iluminada";
@@ -95,6 +89,8 @@ void loop() {
   //realizamos un get optener las variables del server
   getEstado();
 
+  //desidimos si encender los actuadores
+  actuadores();
   delay(10000);
 }
 
@@ -144,7 +140,7 @@ String dividirResp(String respuesta, String  identificador) {
       endPos = respuesta.indexOf(",", valuePos);
     } else if (identificador == "estadoVentilador") {
       valuePos = respuesta.indexOf(":", field1Pos) + 2;
-      endPos = respuesta.indexOf("}", valuePos)-1;
+      endPos = respuesta.indexOf("}", valuePos) - 1;
     } else {
       valuePos = respuesta.indexOf(":", field1Pos) + 2;
       endPos = respuesta.indexOf(",", valuePos) - 1;
@@ -163,4 +159,39 @@ String dividirResp(String respuesta, String  identificador) {
     Serial.println("No se encontró la clave 'field1' en el JSON.");
   }
   return "S/n";
+}
+void actuadores() {
+  //ventilador
+  if (estadoVentiladorServ == "Automatico") {
+    if (temperaturaServ.toInt() > ctrpTempMax) {
+      digitalWrite(venti, HIGH);
+      Serial.println("Encendiendo Ventilador");
+    } else {
+      digitalWrite(venti, LOW);
+      Serial.println("Apagando Ventilador");
+    }
+  } else if (estadoVentiladorServ == "Apagado") {
+    digitalWrite(venti, LOW);
+    Serial.println("Apagando Ventilador");
+  } else if (estadoVentiladorServ == "Encendido") {
+    digitalWrite(venti, HIGH);
+    Serial.println("Encendiendo Ventilador");
+
+  }
+  //lampara
+  if (estadoLamparaServ == "Automatico") {
+    if (iluminacionServ == ctrpLuzEnc) {
+      digitalWrite(lamp, HIGH);
+      Serial.println("Encendiendo Lampara");
+    } else {
+      digitalWrite(lamp, LOW);
+      Serial.println("Apagando Lampara");
+    }
+  } else if (estadoLamparaServ == "Apagado") {
+    digitalWrite(lamp, LOW);
+    Serial.println("Apagando Lampara");
+  } else if (estadoLamparaServ == "Encendido") {
+    digitalWrite(lamp, HIGH);
+    Serial.println("Encendiendo Lampara");
+  }
 }
