@@ -9,18 +9,25 @@ function cambiaModo(modo){
     {
         activarBotones()
     }
+    onSubmitForm();
 }
 
 function cambiaEstado(inputId, estado) {
     // Cambia el valor del input oculto según el estado seleccionado
     document.getElementById(inputId).value = estado;
+    onSubmitForm();
 }
 
 function onSubmitForm() {
-    // Devuelve false para evitar que el formulario se envíe de la manera convencional
-    return false;
+    $.ajax({
+        url: "estado.php",
+        type: "post",
+        data: $("#ivernForm").serialize(),
+        success: function(resultado){
+            $("#resultado").html(resultado);
+        }
+    })
 }
-
 
 function desactivarBotones() {
     // Obtener la referencia a la tabla
