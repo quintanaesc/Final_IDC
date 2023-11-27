@@ -21,7 +21,7 @@ String servidor = "http://internetdelacosa.000webhostapp.com/sensores_BD.php";
 int anlgTemp = A0;
 int digtLuz = 5;
 
-int venti= 12;
+int venti = 12;
 int lamp = 14;
 
 //rango de temperatura de operacion del sensor(°C)
@@ -38,6 +38,13 @@ int ctrLuzEnsen = 0;
 
 //contro automatico 1,0 (S/N)
 int controlAuto = 0;
+
+// Variables en el server
+String temperaturaServ;
+String iluminacionServ;
+String estadoLamparaServ;
+String estadoVentiladorServ;
+
 
 void setup() {
   // Inicia la comunicación serial
@@ -70,29 +77,29 @@ void loop() {
   // Lee el valor digital y calcula la iluminación
   int lecturaDigital = digitalRead(digtLuz);
   String iluminacion;
-  if(lecturaDigital == ctrLuzEnsen){
+  if (lecturaDigital == ctrLuzEnsen) {
     iluminacion = "Habitacion iluminada";
-  }else{
+  } else {
     iluminacion = "Habitacion no iluminada";
   }
 
-  //imprimimos el estado del invernadero 
+  //imprimimos el estado del invernadero
   Serial.print("temperatura actual (C°): ");
   Serial.println(temperatura);
   Serial.println(iluminacion);
 
   //realisamos el post al php de la base de datos
   //para el estado del ivernadero
-  postBD(temperatura,iluminacion);
+  postBD(temperatura, iluminacion);
 
-  //realizamos un get para encender o apagar la lampara
-  String estadoServer = getEstado();
+  //realizamos un get optener las variables del server
+  getEstado();
 
   delay(10000);
 }
 
-void postBD(int temperatura, String iluminacion){
-  String sEnviado = "temperatura=" + String(temperatura) + "&iluminacion="+iluminacion;
+void postBD(int temperatura, String iluminacion) {
+  String sEnviado = "temperatura=" + String(temperatura) + "&iluminacion=" + iluminacion;
   HTTPClient http;
   http.begin(client, servidor);
   http.addHeader("Content-Type", "application/x-www-form-urlencoded");
@@ -110,7 +117,7 @@ void postBD(int temperatura, String iluminacion){
   }
 }
 
-String getEstado(){
+void getEstado() {
   HTTPClient http;
   String url = "http://internetdelacosa.000webhostapp.com/server_Actua.php";
   http.begin(client, url);
@@ -119,5 +126,41 @@ String getEstado(){
   int iCodigoRespuesta = http.GET();
   String respuesta = http.getString();
   Serial.println(respuesta);
-  return respuesta;
+
+  temperaturaServ = dividirResp(respuesta, "temperatura");
+  iluminacionServ = dividirResp(respuesta, "iluminacion");
+  estadoLamparaServ = dividirResp(respuesta, "estadoLampara");
+  estadoVentiladorServ = dividirResp(respuesta, "estadoVentilador");
+}
+
+String dividirResp(String respuesta, String  identificador) {
+  int field1Pos = respuesta.indexOf(identificador);
+  field1Pos = respuesta.indexOf(identificador, field1Pos);
+  int valuePos;
+  int endPos;
+  if (field1Pos != -1) {
+    if (identificador == "temperatura") {
+      valuePos = respuesta.indexOf(":", field1Pos) + 1;
+      endPos = respuesta.indexOf(",", valuePos);
+    } else if (identificador == "estadoVentilador") {
+      valuePos = respuesta.indexOf(":", field1Pos) + 2;
+      endPos = respuesta.indexOf("}", valuePos)-1;
+    } else {
+      valuePos = respuesta.indexOf(":", field1Pos) + 2;
+      endPos = respuesta.indexOf(",", valuePos) - 1;
+    }
+
+    if (valuePos != -1 && endPos != -1) {
+      String field1Value = respuesta.substring(valuePos, endPos);
+      Serial.print("Valor de control ");
+      Serial.println(identificador);
+      Serial.println(field1Value);
+      return field1Value;
+    } else {
+      Serial.println("No se pudo encontrar el valor de field1");
+    }
+  } else {
+    Serial.println("No se encontró la clave 'field1' en el JSON.");
   }
+  return "S/n";
+}
